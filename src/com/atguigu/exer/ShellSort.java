@@ -1,27 +1,12 @@
-package com.atguigu.java;
+package com.atguigu.exer;
 
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.Date;
 
 public class ShellSort {
     public static void main(String[] args) {
         int[] arr = {8,9,1,7,2,3,5,4,6,0};
-//        int[] arr = new int[200000];
-//        for (int i = 0; i < 200000; i++) {
-//            arr[i] = (int)(Math.random() * 8000000);
-//        }
-////        System.out.println("排序前");
-//        Date date = new Date();
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        String date1Str = simpleDateFormat.format(date);
-//        System.out.println("排序前的时间是=" + date1Str);
         shellSort(arr);
-//        System.out.println("排序后");
-//        Date date2 = new Date();
-//        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        String date2Str = simpleDateFormat.format(date2);
-//        System.out.println("排序后的时间是=" + date2Str);
+        System.out.println(Arrays.toString(arr));
     }
     public static void shellSort(int[] arr){//交换法
         int temp = 0;
@@ -42,13 +27,13 @@ public class ShellSort {
     }
     public static void shellSort2(int[] arr){//移位法
         for (int gap = arr.length / 2; gap > 0; gap /= 2){
-            for (int i = gap; i < arr.length; i++) {
+            for (int i = gap; i < arr.length; i++) {//从arr[gap] 开始逐渐往后，每一组数据进行插入排序
                 int Index = i;
-                int temp = arr[Index];
+                int temp = arr[Index];//
                 if (arr[Index] < arr[Index - gap]){
                     while (Index - gap > 0 && temp < arr[Index - gap]){
-                        arr[Index] = arr[Index - gap];//后移
-                        Index -= gap;
+                        arr[Index] = arr[Index - gap];//前一个后移
+                        Index -= gap;//指针前移
                     }
                     arr[Index] = temp;
                 }
