@@ -2,7 +2,7 @@ package com.atguigu.java;
 
 import java.util.Arrays;
 
-public class MergetSort {
+public class MergeSort {
     public static void main(String[] args) {
         int[] arr= {8,4,5,7,1,3,6,2};
         int[] temp = new int[arr.length];
