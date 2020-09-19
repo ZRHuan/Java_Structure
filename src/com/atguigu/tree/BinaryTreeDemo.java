@@ -37,12 +37,17 @@ public class BinaryTreeDemo {
 //        }else {
 //            System.out.printf("没有找到 no = %d 的英雄",5);
 //        }
-        HeroNode resNode = binaryTree.postOrderSearch(5);
-        if (resNode != null){
-            System.out.printf("找到了信息为 no=%d name = %s",resNode.getNo(),resNode.getName());
-        }else {
-            System.out.printf("没有找到 no = %d 的英雄",5);
-        }
+//        HeroNode resNode = binaryTree.postOrderSearch(5);
+//        if (resNode != null){
+//            System.out.printf("找到了信息为 no=%d name = %s",resNode.getNo(),resNode.getName());
+//        }else {
+//            System.out.printf("没有找到 no = %d 的英雄",5);
+//        }
+        System.out.println("删除前，前序遍历");
+        binaryTree.preOrder();
+        binaryTree.delNode(5);
+        System.out.println("删除后，前序遍历");
+        binaryTree.preOrder();
 
     }
 
@@ -53,6 +58,17 @@ class BinaryTree{
 
     public void setRoot(HeroNode root) {
         this.root = root;
+    }
+    public void delNode(int no){
+        if (root != null){
+            if(root.getNo() == no){
+                root = null;
+            }else {
+                root.delNode(no);
+            }
+        }else {
+            System.out.println("为空，无法删除");
+        }
     }
     //    前序遍历
     public void preOrder(){
@@ -96,6 +112,7 @@ class BinaryTree{
     public HeroNode postOrderSearch(int no){
         return this.root != null ? this.root.postOrderSearch(no) : null;
     }
+
 
 }
 
@@ -148,6 +165,27 @@ class HeroNode{
                 "no=" + no +
                 ", name='" + name + '\'' +
                 '}';
+    }
+//1我们的二叉树是单向的，所以我们是判断当前结点的子结点是否需要删除结点，而不能去判断当前这个结点是不是需要删除结
+//2如果当前结点的左子结点不为空，并且左子结点就是要删除结点，就将this.left=null;并且就返回（结束递归删除）
+//3如果当前结点的右子结点不为空，右子结点就是要删除结点，就将 this.right=null;并且就返回（结束递归删除）
+//4如果第2和第3步没有删除结点，那么我们就需要向左子树进行递归删除
+//5如果第4步也没有删除结点，则应当向右子树进行递归删除
+    public void delNode(int no){
+        if (this.left != null && this.left.no == no){
+            this.left = null;
+            return;
+        }
+        if (this.right != null && this.right.no == no){
+            this.right = null;
+            return;
+        }
+        if (this.left != null){
+            this.left.delNode(no);
+        }
+        if (this.right != null){
+            this.right.delNode(no);
+        }
     }
     //      前序遍历
     public void preOrder(){
